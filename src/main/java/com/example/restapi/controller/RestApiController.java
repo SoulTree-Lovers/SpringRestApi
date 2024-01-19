@@ -1,12 +1,15 @@
 package com.example.restapi.controller;
 
 import com.example.restapi.model.BookQueryParam;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
@@ -92,6 +95,17 @@ public class RestApiController {
         System.out.println("name = " + name);
         System.out.println("age = " + age);
         System.out.println("isMan = " + isMan);
+    }
+
+    @DeleteMapping(path = { // 중괄호를 통해 여러 주소를 매핑시킬 수 있다.
+            "/user/{userName}/delete",
+            "/user/{userName}/del"
+        }
+    )
+    public void delete(
+            @PathVariable String userName
+    ) {
+        log.info("user-name : {}", userName);
     }
 
 }
